@@ -53,4 +53,8 @@ if ($validator->fails()) {
 		]
 	]);
     }
+
+	public function loginRequest(Request $request){
+		return 'otp sent';
+	}
 }
