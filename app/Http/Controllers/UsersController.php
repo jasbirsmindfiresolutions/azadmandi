@@ -79,7 +79,11 @@ class UsersController extends Controller
             ) , 200);
 		}
 
-        return $user;
+        $user->update([
+			'otp' => rand(1000, 9900)
+		]);
+
+		return response()->json(['status' => 1, 'message' => 'OTP sent successfully!', 'data' => ['user_id' => $user->id]]);
     }
 }
 
