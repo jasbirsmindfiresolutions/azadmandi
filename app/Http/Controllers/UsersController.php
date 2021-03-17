@@ -46,7 +46,40 @@ class UsersController extends Controller
 
     public function loginRequest(Request $request)
     {
-        return 'otp sent';
+		$validator = Validator::make($request->all() , 
+		[
+			'mobile' => 'required', 
+		], 
+		[
+			'mobile.required' => 'Enter mobile number',
+		]);
+
+        if ($validator->fails())
+        {
+
+            return response()
+                ->json(array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => $validator->errors()
+            ) , 200);
+
+        }
+
+        $validated = $validator->valid();
+
+		$user = User::where('mobile', '=', $validated['mobile'])->first();
+
+		if(empty($user)){
+			return response()
+                ->json(array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => 'User not found!'
+            ) , 200);
+		}
+
+        return $user;
     }
 }
 
