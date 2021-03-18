@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'mobile',
         'mobile_verified_at',
+        'profile_picture',
         'type',
         'otp',
         'email',

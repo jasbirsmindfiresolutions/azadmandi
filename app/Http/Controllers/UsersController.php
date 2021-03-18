@@ -129,5 +129,42 @@ class UsersController extends Controller
 
         return response()->json(['status' => 1, 'message' => 'user logged in', 'data' => ['user_id' => $user->id]]);
     }
+
+    public function uploadProfilePicture(Request $request){
+        $validator = Validator::make($request->all() , [
+			'profile_picture' => 'required|image',
+            'user_id' => 'required' 
+		]);
+
+        if ($validator->fails())
+        {
+
+            return response()
+                ->json(array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => $validator->errors()
+            ) , 200);
+
+        }
+
+        $user = User::find($validator['user_id']);
+
+        if(empty($user)){
+			return response()
+                ->json(array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => 'User not found!'
+            ) , 200);
+		}
+
+        $user->update([
+			'profile_picture' => $request->profile_picture->store('profile_picture')
+		]);
+
+        return response()->json(['status' => 1, 'message' => 'Profile picture updated', 'data' => ['user_id' => $user->id]]);
+
+    }
 }
 
