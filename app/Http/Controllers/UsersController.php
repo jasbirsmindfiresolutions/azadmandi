@@ -139,12 +139,11 @@ class UsersController extends Controller
         if ($validator->fails())
         {
 
-            return response()
-                ->json(array(
+            return array(
                 'status' => 0,
                 'message' => 'Something went wrong!',
                 'errors' => $validator->errors()
-            ) , 200);
+            );
 
         }
 
