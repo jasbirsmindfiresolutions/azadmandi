@@ -85,5 +85,49 @@ class UsersController extends Controller
 
 		return response()->json(['status' => 1, 'message' => 'OTP sent successfully!', 'data' => ['user_id' => $user->id]]);
     }
+
+    public function signin(Request $request)
+    {
+        $validator = Validator::make($request->all() , [
+			'mobile' => 'required', 
+			'otp' => 'required'
+		], [ 
+			'mobile.required' => 'Enter mobile number', 
+			'otp.required' => 'Enter OTP', 
+		]);
+
+        if ($validator->fails())
+        {
+
+            return response()
+                ->json(array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => $validator->errors()
+            ) , 200);
+
+        }
+
+        $validated = $validator->valid();
+
+        $user = User::where('mobile', '=', $validated['mobile'])
+        ->where('otp', '=', $validated['otp'])
+        ->first();
+
+        if(empty($user)){
+			return response()
+                ->json(array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => 'User not found!'
+            ) , 200);
+		}
+
+        $user->update([
+			'mobile_verified_at' => date('Y-m-d H:i:s')
+		]);
+
+        return response()->json(['status' => 1, 'message' => 'user logged in', 'data' => ['user_id' => $user->id]]);
+    }
 }
 
