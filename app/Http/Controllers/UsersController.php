@@ -36,7 +36,7 @@ class UsersController extends Controller
 
         $validated = $validator->valid();
 
-        $validated['otp'] = '112233';
+        $validated['otp'] = rand(1000, 9900);
         $validated['password'] = Hash::make(time());
 
         $user = User::create($validated);
@@ -132,8 +132,8 @@ class UsersController extends Controller
 
     public function uploadProfilePicture(Request $request){
         $validator = Validator::make($request->all() , [
-			'profile_picture' => 'required|image',
-            'user_id' => 'required' 
+			'profile_picture' => 'bail|required|image',
+            'user_id' => 'bail|required' 
 		]);
 
         if ($validator->fails())
