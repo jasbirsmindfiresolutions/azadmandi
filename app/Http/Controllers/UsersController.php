@@ -147,7 +147,7 @@ class UsersController extends Controller
 
         }
 
-        $user = User::find($validator['user_id']);
+        $user = User::find($request->user_id);
 
         if(empty($user)){
 			return response()
