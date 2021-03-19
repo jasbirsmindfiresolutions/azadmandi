@@ -26,3 +26,5 @@ Route::post('/login-request', [UsersController::class, 'loginRequest']);
 Route::post('signin', [UsersController::class, 'signin']);
 
 Route::post('upload-profile-picture', [UsersController::class, 'uploadProfilePicture']);
+
+Route::get('get-profile-picture', [UsersController::class, 'getProfilePicture']);
