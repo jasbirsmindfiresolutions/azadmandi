@@ -208,15 +208,20 @@ class UsersController extends Controller
 
     public function addShop(Request $request){
         $validator = Validator::make($request->all() , [
-            'user_id' => 'required|number',
-            'name' => 'required|min:3',
+            'user_id' => 'required',
+            'name' => 'required',
             'number' => 'required',
             'block' => 'required',
             'mandi_name' => 'required',
             'state' => 'required',
             'pincode' => 'required',
             'is_active' => 'required' 
-		]);
+		], [], [
+            'name' => 'Shop Name',
+            'number' => 'Shop Number',
+            'block' => 'Shop Block',
+            'is_active' => 'Set 1 if shop is active otherwise 0' 
+        ]);
 
         if ($validator->fails())
         {
