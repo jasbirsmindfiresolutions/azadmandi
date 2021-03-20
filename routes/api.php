@@ -28,3 +28,5 @@ Route::post('signin', [UsersController::class, 'signin']);
 Route::post('upload-profile-picture', [UsersController::class, 'uploadProfilePicture']);
 
 Route::get('get-profile-picture', [UsersController::class, 'getProfilePicture']);
+
+Route::post('/shop/add', [UsersController::class, 'addShop']);

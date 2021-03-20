@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Shop;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -202,6 +203,34 @@ class UsersController extends Controller
                 'profile_picture' => Storage::url($user->profile_picture)
             ]
         ]);
+
+    }
+
+    public function addShop(Request $request){
+        $validator = Validator::make($request->all() , [
+            'user_id' => 'required|number',
+            'name' => 'required|min:3',
+            'number' => 'required',
+            'block' => 'required',
+            'mandi_name' => 'required',
+            'state' => 'required',
+            'pincode' => 'required',
+            'is_active' => 'required' 
+		]);
+
+        if ($validator->fails())
+        {
+
+            return array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => $validator->errors()
+            );
+
+        }
+
+        $shop = Shop::create($validated);
+
 
     }
 }

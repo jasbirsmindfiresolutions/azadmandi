@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('mobile', 13)->unique();
             $table->string('profile_picture')->nullable();
+            $table->timestamp('dob')->nullable();
             $table->enum('type', array('buyer','seller'))->default('buyer');
             $table->timestamp('mobile_verified_at')->nullable();
             $table->integer('otp');
