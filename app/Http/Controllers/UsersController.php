@@ -144,7 +144,7 @@ class UsersController extends Controller
                 'status' => 0,
                 'message' => 'Something went wrong!',
                 'errors' => $validator->errors()
-            );
+            ); 
 
         }
 
