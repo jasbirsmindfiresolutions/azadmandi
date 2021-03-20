@@ -234,6 +234,8 @@ class UsersController extends Controller
 
         }
 
+        $validated = $validator->valid();
+
         $shop = Shop::create($validated);
 
 
