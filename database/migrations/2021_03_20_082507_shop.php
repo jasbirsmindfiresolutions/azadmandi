@@ -22,7 +22,7 @@ class Shop extends Migration
             $table->string('mandi_name');
             $table->string('state');
             $table->string('pincode');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->boolean('is_active');
             $table->timestamps();
         });
