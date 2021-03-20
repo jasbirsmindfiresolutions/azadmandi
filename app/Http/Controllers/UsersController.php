@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -159,7 +160,7 @@ class UsersController extends Controller
 		}
 
         $user->update([
-			'profile_picture' => $request->profile_picture->store('profile_picture')
+			'profile_picture' => $request->profile_picture->store('public')
 		]);
 
         return response()->json(['status' => 1, 'message' => 'Profile picture updated', 'data' => ['user_id' => $user->id]]);
@@ -198,10 +199,9 @@ class UsersController extends Controller
             'message' => 'Profile picture', 
             'data' => [
                 'user_id' => $user->id,
-                'profile_picture' => storage_path($user->profile_picture)
+                'profile_picture' => Storage::url($user->profile_picture)
             ]
         ]);
 
     }
 }
-
