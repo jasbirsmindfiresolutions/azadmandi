@@ -238,6 +238,14 @@ class UsersController extends Controller
 
         $shop = Shop::create($validated);
 
+        return response()->json([
+            'status' => 1, 
+            'message' => 'Your Shop ' . $validated['name'] . ' Added!', 
+            'data' => [
+                'shop_id' => $shop->id
+            ]
+        ]);
+
 
     }
 }
