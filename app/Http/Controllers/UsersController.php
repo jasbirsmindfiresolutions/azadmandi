@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Shop;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -276,6 +277,16 @@ class UsersController extends Controller
         $validated = $validator->valid();
 
         $product = Product::create($validated);
+
+        
+
+        foreach($request->images as $image){
+            $img = $image->store('public');
+            $productImage = new ProductImage();
+            $productImage->image = $img;
+            $productImage->save();
+        }
+        
 
         return response()->json([
             'status' => 1, 
