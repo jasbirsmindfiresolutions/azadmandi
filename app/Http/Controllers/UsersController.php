@@ -283,6 +283,7 @@ class UsersController extends Controller
         foreach($request->images as $image){
             $img = $image->store('public');
             $productImage = new ProductImage();
+            $productImage->product_id = $product->id;
             $productImage->image = $img;
             $productImage->save();
         }
