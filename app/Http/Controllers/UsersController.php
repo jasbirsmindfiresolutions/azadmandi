@@ -301,4 +301,44 @@ class UsersController extends Controller
 
 
     }
+
+    public function getProduct(Request $request){
+        $validator = Validator::make($request->all() , [
+            'product_id' => 'required' 
+		]);
+
+        if ($validator->fails())
+        {
+
+            return array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => $validator->errors()
+            );
+
+        }
+
+        $product = Product::find($request->product_id);
+
+        if(empty($product)){
+			return response()
+                ->json(array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => 'Product not found!'
+            ) , 200);
+		}
+
+        $product_images = ProductImage::where('product_id', '=', $product->id)->get()->select('image');
+
+        return response()->json([
+            'status' => 1, 
+            'message' => 'Product Detail', 
+            'data' => [
+                'product_id' => $product->id,
+                'product_images' => $product_images
+            ]
+        ]);
+
+    }
 }

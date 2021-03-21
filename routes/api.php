@@ -32,3 +32,5 @@ Route::get('get-profile-picture', [UsersController::class, 'getProfilePicture'])
 Route::post('/shop/add', [UsersController::class, 'addShop']);
 
 Route::post('/product/add', [UsersController::class, 'addProduct']);
+
+Route::get('/product/detail', [UsersController::class, 'getProduct']);
