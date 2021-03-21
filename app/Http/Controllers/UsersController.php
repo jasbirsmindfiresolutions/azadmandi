@@ -331,12 +331,18 @@ class UsersController extends Controller
 
         $product_images = ProductImage::where('product_id', '=', $product->id)->select('image')->get();
 
+        $productImg = [];
+
+        foreach($product_images as $img){
+            $productImg[] = Storage::url($img->image)
+        }
+
         return response()->json([
             'status' => 1, 
             'message' => 'Product Detail', 
             'data' => [
                 'product_id' => $product->id,
-                'product_images' => $product_images
+                'product_images' => $productImg
             ]
         ]);
 
