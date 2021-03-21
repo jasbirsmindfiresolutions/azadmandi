@@ -257,7 +257,9 @@ class UsersController extends Controller
             'name' => 'required|min:3',
             'price_per_kg' => 'required',
             'is_out_of_stock' => 'in:0,1',
-            'is_dynamic_price_enabled' => 'in:0,1'
+            'is_dynamic_price_enabled' => 'in:0,1',
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpg,jpeg,png'
 		], [], [
             'category' => 'Product category',
             'name' => 'Product Name',
