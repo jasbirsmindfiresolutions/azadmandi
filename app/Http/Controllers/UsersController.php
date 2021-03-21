@@ -251,12 +251,14 @@ class UsersController extends Controller
 
     public function addProduct(Request $request){
         $validator = Validator::make($request->all() , [
-            'category' => 'required',
+            'category' => 'required|in:fruit,vegitable',
             'user_id' => 'required',
-            'name' => 'required',
+            'name' => 'required|min:3',
             'price_per_kg' => 'required',
+            'is_out_of_stock' => 'in:0,1',
+            'is_dynamic_price_enabled' => 'in:0,1'
 		], [], [
-            'category' => 'Product category (fruit | vegitable)',
+            'category' => 'Product category',
             'name' => 'Product Name',
         ]);
 
