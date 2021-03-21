@@ -341,7 +341,7 @@ class UsersController extends Controller
             'status' => 1, 
             'message' => 'Product Detail', 
             'data' => [
-                'product_id' => $product->id,
+                'product' => $product,
                 'product_images' => $productImg
             ]
         ]);
