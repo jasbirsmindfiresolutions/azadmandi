@@ -329,7 +329,7 @@ class UsersController extends Controller
             ) , 200);
 		}
 
-        $product_images = ProductImage::where('product_id', '=', $product->id)->get()->select('image');
+        $product_images = ProductImage::where('product_id', '=', $product->id)->select('image')->get();
 
         return response()->json([
             'status' => 1, 
