@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Shop;
+use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -220,7 +221,7 @@ class UsersController extends Controller
             'name' => 'Shop Name',
             'number' => 'Shop Number',
             'block' => 'Shop Block',
-            'is_active' => 'Set 1 if shop is active otherwise 0' 
+            'is_active' => 'Shop Active' 
         ]);
 
         if ($validator->fails())
@@ -243,6 +244,42 @@ class UsersController extends Controller
             'message' => 'Your Shop ' . $validated['name'] . ' Added!', 
             'data' => [
                 'shop_id' => $shop->id
+            ]
+        ]);
+
+    }
+
+    public function addProduct(Request $request){
+        $validator = Validator::make($request->all() , [
+            'category' => 'required',
+            'user_id' => 'required',
+            'name' => 'required',
+            'price_per_kg' => 'required',
+		], [], [
+            'category' => 'Product category (fruit | vegitable)',
+            'name' => 'Product Name',
+        ]);
+
+        if ($validator->fails())
+        {
+
+            return array(
+                'status' => 0,
+                'message' => 'Something went wrong!',
+                'errors' => $validator->errors()
+            );
+
+        }
+
+        $validated = $validator->valid();
+
+        $product = Product::create($validated);
+
+        return response()->json([
+            'status' => 1, 
+            'message' => 'Your Product ' . $validated['name'] . ' Added!', 
+            'data' => [
+                'product_id' => $product->id
             ]
         ]);
 
