@@ -334,7 +334,7 @@ class UsersController extends Controller
         $productImg = [];
 
         foreach($product_images as $img){
-            $productImg[] = Storage::url($img->image)
+            $productImg[] = Storage::url($img->image);
         }
 
         return response()->json([
