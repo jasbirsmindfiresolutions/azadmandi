@@ -32,7 +32,7 @@ class UsersController extends Controller
             return response()
                 ->json(array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             ) , 200);
 
@@ -64,7 +64,7 @@ class UsersController extends Controller
             return response()
                 ->json(array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             ) , 200);
 
@@ -78,7 +78,7 @@ class UsersController extends Controller
 			return response()
                 ->json(array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => 'User not found!',
                 'errors' => 'User not found!'
             ) , 200);
 		}
@@ -106,7 +106,7 @@ class UsersController extends Controller
             return response()
                 ->json(array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             ) , 200);
 
@@ -122,7 +122,7 @@ class UsersController extends Controller
 			return response()
                 ->json(array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => 'User not found!',
                 'errors' => 'User not found!'
             ) , 200);
 		}
@@ -145,7 +145,7 @@ class UsersController extends Controller
 
             return array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             ); 
 
@@ -157,7 +157,7 @@ class UsersController extends Controller
 			return response()
                 ->json(array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => 'User not found!',
                 'errors' => 'User not found!'
             ) , 200);
 		}
@@ -180,7 +180,7 @@ class UsersController extends Controller
 
             return array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             );
 
@@ -192,7 +192,7 @@ class UsersController extends Controller
 			return response()
                 ->json(array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => 'User not found!',
                 'errors' => 'User not found!'
             ) , 200);
 		}
@@ -230,7 +230,7 @@ class UsersController extends Controller
 
             return array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             );
 
@@ -270,7 +270,7 @@ class UsersController extends Controller
 
             return array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             );
 
@@ -312,7 +312,7 @@ class UsersController extends Controller
 
             return array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => $validator->errors()->first(),
                 'errors' => $validator->errors()
             );
 
@@ -324,7 +324,7 @@ class UsersController extends Controller
 			return response()
                 ->json(array(
                 'status' => 0,
-                'message' => 'Something went wrong!',
+                'message' => 'Product not found!',
                 'errors' => 'Product not found!'
             ) , 200);
 		}
